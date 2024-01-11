@@ -17,7 +17,7 @@ bot.on('text', (msg) => {
 
   keyboardButtons.rand.forEach((obj) => {
     if (msg.text === obj.title) {
-      getRand(msg.chat.id, obj.id);
+      getRand(msg, obj.id);
       cont = false;
     }
   });
@@ -37,6 +37,7 @@ function getQuote(msg) {
     bot.sendMessage(msg.chat.id, message, {
       parseMode: 'html',
       replyMarkup: bot.keyboard(keyboard),
+      replyToMessage: msg.message_id,
     })
       .then(console.info)
       .catch(console.error);
@@ -47,16 +48,18 @@ function getAdvice(msg) {
   api.getAdvice().then((text) => {
     bot.sendMessage(msg.chat.id, text, {
       replyMarkup: bot.keyboard(keyboard),
+      replyToMessage: msg.message_id,
     })
       .then(console.info)
       .catch(console.error);
   });
 }
 
-function getRand(id, buttonId) {
+function getRand(msg, buttonId) {
   api.getRand(buttonId).then((text) => {
-    bot.sendMessage(id, text, {
+    bot.sendMessage(msg.chat.id, text, {
       replyMarkup: bot.keyboard(keyboard),
+      replyToMessage: msg.message_id,
     })
       .then(console.info)
       .catch(console.error);
