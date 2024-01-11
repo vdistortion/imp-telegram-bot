@@ -34,7 +34,7 @@ bot.on('text', (msg) => {
 
 async function getQuote(msg) {
   const text = await api.getQuote();
-
+  console.log('getQuote', text);
   bot.sendMessage(msg.chat.id, text, {
     parseMode: 'html',
     replyMarkup: bot.keyboard(keyboard),
@@ -46,7 +46,7 @@ async function getQuote(msg) {
 
 async function getAdvice(msg) {
   const text = await api.getAdvice();
-
+  console.log('getAdvice', text);
   bot.sendMessage(msg.chat.id, text, {
     replyMarkup: bot.keyboard(keyboard),
     replyToMessage: msg.message_id,
@@ -57,7 +57,7 @@ async function getAdvice(msg) {
 
 async function getRand(msg, buttonId) {
   const text = await api.getRand(buttonId);
-
+  console.log('getRand', text);
   bot.sendMessage(msg.chat.id, text, {
     replyMarkup: bot.keyboard(keyboard),
     replyToMessage: msg.message_id,
