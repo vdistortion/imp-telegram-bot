@@ -2,9 +2,7 @@ import { keyboard, keyboardButtons } from './keyboard/index.js';
 import api from './api/fetch.js';
 import bot from './api/bot.js';
 
-bot.on('polling_error', console.error);
-
-bot.on('message', (msg) => {
+bot.on('text', (msg) => {
   let cont = true;
 
   if (msg.text === keyboardButtons.advice.title) {
@@ -25,32 +23,44 @@ bot.on('message', (msg) => {
   });
 
   if (cont) {
-    bot.sendMessage(msg.chat.id, '😈').catch(console.error);
-    bot.sendMessage(msg.chat.id, `${msg.chat.first_name}, не понимаю тебя!`).catch(console.error);
+    bot.sendMessage(msg.chat.id, '😈')
+      .then(console.info)
+      .catch(console.error);
+    bot.sendMessage(msg.chat.id, `${msg.chat.first_name}, не понимаю тебя!`)
+      .then(console.info)
+      .catch(console.error);
   }
 });
 
 function getQuote(msg) {
   api.getQuote().then((message) => {
     bot.sendMessage(msg.chat.id, message, {
-      parse_mode: 'HTML',
-      reply_markup: { keyboard },
-    }).catch(console.error);
+      parseMode: 'html',
+      replyMarkup: bot.keyboard(keyboard),
+    })
+      .then(console.info)
+      .catch(console.error);
   });
 }
 
 function getAdvice(msg) {
   api.getAdvice().then((text) => {
     bot.sendMessage(msg.chat.id, text, {
-      reply_markup: { keyboard },
-    }).catch(console.error);
+      replyMarkup: bot.keyboard(keyboard),
+    })
+      .then(console.info)
+      .catch(console.error);
   });
 }
 
 function getRand(id, buttonId) {
   api.getRand(buttonId).then((text) => {
     bot.sendMessage(id, text, {
-      reply_markup: { keyboard },
-    }).catch(console.error);
+      replyMarkup: bot.keyboard(keyboard),
+    })
+      .then(console.info)
+      .catch(console.error);
   });
 }
+
+export default bot;
