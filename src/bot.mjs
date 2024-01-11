@@ -1,6 +1,6 @@
-import { keyboard, keyboardButtons } from './keyboard/index.js';
-import api from './api/fetch.js';
-import bot from './api/bot.js';
+import { keyboard, keyboardButtons } from './keyboard/index.mjs';
+import api from './api/fetch.mjs';
+import bot from './api/bot.mjs';
 
 bot.on('text', (msg) => {
   let cont = true;

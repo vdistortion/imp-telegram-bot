@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { encoding } from '../utils/encodingText.js';
+import { encoding } from '../utils/encodingText.mjs';
 
 export default {
   getQuote() {

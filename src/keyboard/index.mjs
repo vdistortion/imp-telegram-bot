@@ -1,5 +1,5 @@
-import { keyboardButtons } from './buttons.js';
-import { chunk } from '../utils/chunkArray.js';
+import { keyboardButtons } from './buttons.mjs';
+import { chunk } from '../utils/chunkArray.mjs';
 
 const names = [
   keyboardButtons.quote,
