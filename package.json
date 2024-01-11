@@ -2,12 +2,11 @@
   "name": "imp-telegram-bot",
   "version": "0.0.2",
   "description": "Telegram Bot",
-  "main": "src/index.mjs",
   "scripts": {
     "dev": "vc dev",
     "dev-with-tunnel": "npm run tunnel & npm run dev",
     "tunnel": "cloudflared tunnel --url http://localhost:3000",
-    "start": "nodemon src/index.mjs"
+    "localhost": "nodemon src/index.mjs"
   },
   "keywords": [
     "telegram",
