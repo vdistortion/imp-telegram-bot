@@ -32,38 +32,38 @@ bot.on('text', (msg) => {
   }
 });
 
-function getQuote(msg) {
-  api.getQuote().then((message) => {
-    bot.sendMessage(msg.chat.id, message, {
-      parseMode: 'html',
-      replyMarkup: bot.keyboard(keyboard),
-      replyToMessage: msg.message_id,
-    })
-      .then(console.info)
-      .catch(console.error);
-  });
+async function getQuote(msg) {
+  const text = await api.getQuote();
+
+  bot.sendMessage(msg.chat.id, text, {
+    parseMode: 'html',
+    replyMarkup: bot.keyboard(keyboard),
+    replyToMessage: msg.message_id,
+  })
+    .then(console.info)
+    .catch(console.error);
 }
 
-function getAdvice(msg) {
-  api.getAdvice().then((text) => {
-    bot.sendMessage(msg.chat.id, text, {
-      replyMarkup: bot.keyboard(keyboard),
-      replyToMessage: msg.message_id,
-    })
-      .then(console.info)
-      .catch(console.error);
-  });
+async function getAdvice(msg) {
+  const text = await api.getAdvice();
+
+  bot.sendMessage(msg.chat.id, text, {
+    replyMarkup: bot.keyboard(keyboard),
+    replyToMessage: msg.message_id,
+  })
+    .then(console.info)
+    .catch(console.error);
 }
 
-function getRand(msg, buttonId) {
-  api.getRand(buttonId).then((text) => {
-    bot.sendMessage(msg.chat.id, text, {
-      replyMarkup: bot.keyboard(keyboard),
-      replyToMessage: msg.message_id,
-    })
-      .then(console.info)
-      .catch(console.error);
-  });
+async function getRand(msg, buttonId) {
+  const text = await api.getRand(buttonId);
+
+  bot.sendMessage(msg.chat.id, text, {
+    replyMarkup: bot.keyboard(keyboard),
+    replyToMessage: msg.message_id,
+  })
+    .then(console.info)
+    .catch(console.error);
 }
 
 export default bot;
