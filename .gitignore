@@ -1,4 +1,12 @@
-/node_modules/
-.vercel
-.idea
+node_modules
+*.log*
+.nitro
+.cache
+.output
 .env
+.idea
+dist
+
+# Local Netlify folder
+.netlify
+.vercel

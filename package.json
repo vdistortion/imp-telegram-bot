@@ -2,11 +2,14 @@
   "name": "imp-telegram-bot",
   "version": "0.0.2",
   "description": "Telegram Bot",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "vc dev",
-    "dev-with-tunnel": "npm run tunnel & npm run dev",
-    "tunnel": "cloudflared tunnel --url http://localhost:3000",
-    "localhost": "nodemon src/index.mjs"
+    "prepare": "nitropack prepare",
+    "dev": "nitropack dev",
+    "build": "nitropack build",
+    "preview": "node .output/server/index.mjs",
+    "serve": "ngrok http 3000"
   },
   "keywords": [
     "telegram",
@@ -14,19 +17,15 @@
   ],
   "author": "Валентин <astrotrain55@gmail.com>",
   "license": "GPL",
-  "engines": {
-    "node": "^18.0.0"
-  },
   "dependencies": {
     "dotenv": "^16.3.1",
     "iconv-lite": "^0.6.3",
+    "nitropack": "latest",
     "node-fetch": "^3.3.2",
-    "telebot": "^1.4.1",
-    "telebot-vercel": "^1.0.1"
+    "telebot": "^1.4.1"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
-    "@types/telebot": "^1.2.7",
-    "nodemon": "^3.0.2"
+    "@types/telebot": "^1.2.7"
   }
 }

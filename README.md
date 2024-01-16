@@ -1,32 +1,22 @@
-## Telegram Bot Template for [Vercel](https://vercel.com)
+# Telegram Bot Starter
 
-### Run locally
+A starter template for Telegram bots on Serverless, with [Vercel](https://vercel.com), [Netlify](https://netlify.com), and [more](https://nitro.unjs.io/deploy) support.
 
-#### 1. Install [Vercel CLI](https://vercel.com/docs/cli)
+Built top of [Nitro](https://nitro.unjs.io/) and [TeleBot](https://github.com/mullwar/telebot).
 
-```bash
-npm i -g vercel
-```
+## Local Development
 
-#### 2. Install [CloudFlare tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/do-more-with-tunnels/trycloudflare/) (`cloudflared`)
+1. Create a bot with [@BotFather](https://t.me/BotFather), and get the bot token.
+2. Clone this repo.
+3. Run `npm ci` to install dependencies.
+4. Copy `.env.example` to `.env`, and fill in the `TELEGRAM_BOT_TOKEN` and `SECRET_HASH` (whatever you want) in `.env`.
+5. Run `npm run dev` to start the development server.
+6. Expose your local server to the internet with [Local Port Forwarding of VSCode](https://code.visualstudio.com/docs/editor/port-forwarding) (**set Port Visibility to Public**) or [ngrok](https://ngrok.com/).
+7. Visit https://your-domain.com/telegram-hook?setWebhook=true
+8. Send `/start` to your bot.
 
-[Download link](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/installation/)
+## Deployment
 
-#### 3. Then run local dev server with tunnel
-
-```bash
-npm run dev-with-tunnel
-```
-
-And open link from terminal (ends with `*.trycloudflare.com`) to set WebHook
-
-Now you can make some changes in [src/bot.js](src/bot.js)
-
-[Documentation for TeleBot](https://github.com/mullwar/telebot)
-
-### Template structure:
-
-- [api/telegram.mjs](api/telegram.js) — Endpoint function for WebHooks
-- [api/setWebhook.mjs](api/setWebhook.js) — Function for setting WebHook URL
-
-###### P.S. Don't forget to remove or restrict [api/setWebhook.js](api/setWebhook.js) function before going to production
+1. Deploy on [Vercel](https://vercel.com) or [Netlify](https://netlify.com), with `TELEGRAM_BOT_TOKEN` and `SECRET_HASH` environment variables.
+2. Visit https://your-domain.com/telegram-hook?setWebhook=true
+3. Send `/start` to your bot.

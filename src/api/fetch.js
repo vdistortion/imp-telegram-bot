@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { encoding } from '../utils/encodingText.mjs';
+import { encoding } from '../utils/encodingText.js';
 
 export default {
   async getQuote() {
