@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "routes/*.js": {
-      "includeFiles": "node_modules/telebot/plugins/**"
-    }
-  },
   "github": {
     "silent": true
   }
