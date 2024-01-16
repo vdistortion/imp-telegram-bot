@@ -1,6 +1,6 @@
 {
   "functions": {
-    "routes/**": {
+    "routes/*.js": {
       "includeFiles": "node_modules/telebot/plugins/**"
     }
   },
