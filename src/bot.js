@@ -2,38 +2,28 @@ import { keyboard, keyboardButtons } from './keyboard/index.js';
 import api from './api/fetch.js';
 import { bot, message, Markup } from './api/bot.js';
 
-bot.on(message('text'), (ctx) => {
-  let cont = true;
+const mapRand = keyboardButtons.rand.reduce((acc, item) => {
+  acc[item.title] = item.id;
+  return acc;
+}, {});
 
+bot.on(message('text'), async (ctx) => {
   if (ctx.message.text === keyboardButtons.advice.title) {
-    getAdvice(ctx);
-    cont = false;
-  }
-
-  if (ctx.message.text === keyboardButtons.quote.title) {
-    getQuote(ctx);
-    cont = false;
-  }
-
-  keyboardButtons.rand.forEach((obj) => {
-    if (ctx.message.text === obj.title) {
-      getRand(ctx, obj.id);
-      cont = false;
-    }
-  });
-
-  if (cont) {
-    bot.telegram.sendMessage(ctx.chat.id, '😈')
-      .catch(console.error);
-    bot.telegram.sendMessage(ctx.chat.id, `${ctx.chat.first_name}, не понимаю тебя!`)
-      .catch(console.error);
+    await getAdvice(ctx);
+  } else if (ctx.message.text === keyboardButtons.quote.title) {
+    await getQuote(ctx);
+  } else if (mapRand[ctx.message.text]) {
+    await getRand(ctx, mapRand[ctx.message.text]);
+  } else {
+    await ctx.reply('😈');
+    await ctx.reply(`${ctx.chat.first_name}, не понимаю тебя!`);
   }
 });
 
 async function getQuote(ctx) {
   const text = await api.getQuote();
 
-  await bot.telegram.sendMessage(ctx.chat.id, text, {
+  return ctx.reply(text, {
     parse_mode: 'html',
     reply_markup: Markup.keyboard(keyboard),
     reply_to_message_id: ctx.message.message_id,
@@ -43,7 +33,7 @@ async function getQuote(ctx) {
 async function getAdvice(ctx) {
   const text = await api.getAdvice();
 
-  await bot.telegram.sendMessage(ctx.chat.id, text, {
+  return ctx.reply(text, {
     reply_markup: Markup.keyboard(keyboard),
     reply_to_message_id: ctx.message.message_id,
   });
@@ -52,7 +42,7 @@ async function getAdvice(ctx) {
 async function getRand(ctx, buttonId) {
   const text = await api.getRand(buttonId);
 
-  await bot.telegram.sendMessage(ctx.chat.id, text, {
+  return ctx.reply(text, {
     reply_markup: Markup.keyboard(keyboard),
     reply_to_message_id: ctx.message.message_id,
   });
