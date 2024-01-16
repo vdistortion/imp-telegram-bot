@@ -24,39 +24,37 @@ bot.on(message('text'), (ctx) => {
 
   if (cont) {
     bot.telegram.sendMessage(ctx.chat.id, '😈')
-      // .then(console.info)
       .catch(console.error);
     bot.telegram.sendMessage(ctx.chat.id, `${ctx.chat.first_name}, не понимаю тебя!`)
-      // .then(console.info)
       .catch(console.error);
   }
 });
 
 async function getQuote(ctx) {
   const text = await api.getQuote();
-  // console.log('getQuote', text);
+
   await bot.telegram.sendMessage(ctx.chat.id, text, {
     parse_mode: 'html',
     reply_markup: Markup.keyboard(keyboard),
-    reply_to_message: ctx.message_id,
+    reply_to_message_id: ctx.message.message_id,
   });
 }
 
 async function getAdvice(ctx) {
   const text = await api.getAdvice();
-  // console.log('getAdvice', text);
+
   await bot.telegram.sendMessage(ctx.chat.id, text, {
     reply_markup: Markup.keyboard(keyboard),
-    reply_to_message: ctx.message_id,
+    reply_to_message_id: ctx.message.message_id,
   });
 }
 
 async function getRand(ctx, buttonId) {
   const text = await api.getRand(buttonId);
-  // console.log('getRand', text);
+
   await bot.telegram.sendMessage(ctx.chat.id, text, {
     reply_markup: Markup.keyboard(keyboard),
-    reply_to_message: ctx.message_id,
+    reply_to_message_id: ctx.message.message_id,
   });
 }
 

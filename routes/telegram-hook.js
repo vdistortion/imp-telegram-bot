@@ -1,5 +1,4 @@
 import bot from '../src/bot.js';
-import 'dotenv/config';
 
 const SECRET_HASH = process.env.SECRET_HASH;
 
