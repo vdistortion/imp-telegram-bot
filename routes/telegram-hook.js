@@ -1,6 +1,4 @@
 import bot from '../src/bot.js';
-import 'telebot/plugins/shortReply.js';
-import 'telebot/plugins/regExpMessage.js';
 import 'dotenv/config';
 
 const SECRET_HASH = process.env.SECRET_HASH;
