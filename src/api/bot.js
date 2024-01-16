@@ -5,8 +5,8 @@ export default new TelegramBot({
   token: process.env.TELEGRAM_BOT_TOKEN,
   allowedUpdates: [],
   polling: {
-    interval: 1000,
-    timeout: 0,
+    interval: 5000,
+    timeout: 5000,
     retryTimeout: 5000,
   },
 });
