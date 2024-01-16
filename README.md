@@ -1,4 +1,4 @@
-# Telegram Bot Starter
+# ImpBot
 
 A starter template for Telegram bots on Serverless, with [Vercel](https://vercel.com), [Netlify](https://netlify.com), and [more](https://nitro.unjs.io/deploy) support.
 
