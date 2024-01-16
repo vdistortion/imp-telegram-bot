@@ -1,7 +1,7 @@
 {
   "name": "imp-telegram-bot",
-  "version": "0.0.2",
-  "description": "Telegram Bot",
+  "version": "0.0.3",
+  "description": "ImpBot",
   "private": true,
   "type": "module",
   "scripts": {
