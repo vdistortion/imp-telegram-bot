@@ -1,62 +1,62 @@
 import { keyboard, keyboardButtons } from './keyboard/index.js';
 import api from './api/fetch.js';
-import bot from './api/bot.js';
+import { bot, message, Markup } from './api/bot.js';
 
-bot.on('text', (msg) => {
+bot.on(message('text'), (ctx) => {
   let cont = true;
 
-  if (msg.text === keyboardButtons.advice.title) {
-    getAdvice(msg);
+  if (ctx.message.text === keyboardButtons.advice.title) {
+    getAdvice(ctx);
     cont = false;
   }
 
-  if (msg.text === keyboardButtons.quote.title) {
-    getQuote(msg);
+  if (ctx.message.text === keyboardButtons.quote.title) {
+    getQuote(ctx);
     cont = false;
   }
 
   keyboardButtons.rand.forEach((obj) => {
-    if (msg.text === obj.title) {
-      getRand(msg, obj.id);
+    if (ctx.message.text === obj.title) {
+      getRand(ctx, obj.id);
       cont = false;
     }
   });
 
   if (cont) {
-    bot.sendMessage(msg.chat.id, '😈')
-      .then(console.info)
+    bot.telegram.sendMessage(ctx.chat.id, '😈')
+      // .then(console.info)
       .catch(console.error);
-    bot.sendMessage(msg.chat.id, `${msg.chat.first_name}, не понимаю тебя!`)
-      .then(console.info)
+    bot.telegram.sendMessage(ctx.chat.id, `${ctx.chat.first_name}, не понимаю тебя!`)
+      // .then(console.info)
       .catch(console.error);
   }
 });
 
-async function getQuote(msg) {
+async function getQuote(ctx) {
   const text = await api.getQuote();
-  console.log('getQuote', text);
-  await bot.sendMessage(msg.chat.id, text, {
-    parseMode: 'html',
-    replyMarkup: bot.keyboard(keyboard),
-    replyToMessage: msg.message_id,
+  // console.log('getQuote', text);
+  await bot.telegram.sendMessage(ctx.chat.id, text, {
+    parse_mode: 'html',
+    reply_markup: Markup.keyboard(keyboard),
+    reply_to_message: ctx.message_id,
   });
 }
 
-async function getAdvice(msg) {
+async function getAdvice(ctx) {
   const text = await api.getAdvice();
-  console.log('getAdvice', text);
-  await bot.sendMessage(msg.chat.id, text, {
-    replyMarkup: bot.keyboard(keyboard),
-    replyToMessage: msg.message_id,
+  // console.log('getAdvice', text);
+  await bot.telegram.sendMessage(ctx.chat.id, text, {
+    reply_markup: Markup.keyboard(keyboard),
+    reply_to_message: ctx.message_id,
   });
 }
 
-async function getRand(msg, buttonId) {
+async function getRand(ctx, buttonId) {
   const text = await api.getRand(buttonId);
-  console.log('getRand', text);
-  await bot.sendMessage(msg.chat.id, text, {
-    replyMarkup: bot.keyboard(keyboard),
-    replyToMessage: msg.message_id,
+  // console.log('getRand', text);
+  await bot.telegram.sendMessage(ctx.chat.id, text, {
+    reply_markup: Markup.keyboard(keyboard),
+    reply_to_message: ctx.message_id,
   });
 }
 
