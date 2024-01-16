@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/**": {
+    "routes/**": {
       "includeFiles": "node_modules/telebot/plugins/**"
     }
   },
