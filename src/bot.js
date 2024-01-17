@@ -12,12 +12,13 @@ bot.start((ctx) => ctx.reply(`Будь как дома, путник ${ctx.chat.
 bot.help((ctx) => ctx.replyWithHTML(`
 /start — Запуск/перезапуск бота
 /cat — Запросить котика
+/item — Что-то непонятное
 /help — Список возможных команд
 `));
 
-bot.command('cat', (ctx) => {
-  return api.getCat().then((url) => ctx.replyWithPhoto(Input.fromURL(url)));
-});
+bot.command('cat', (ctx) => api.getCat().then((url) => ctx.replyWithPhoto(Input.fromURL(url))));
+
+bot.command('item', (ctx) => api.getList().then((text) => ctx.replyWithHTML(text)));
 
 bot.on(message('text'), (ctx) => {
   if (ctx.message.text === keyboardButtons.advice.title) {
