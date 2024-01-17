@@ -1,7 +1,7 @@
 export const keyboardButtons = {
   advice: {
     id: 'advice',
-    title: 'Отмочить совет (+18)',
+    title: 'Отмочить совет (18+)',
   },
   quote: {
     id: 'quote',
@@ -14,7 +14,7 @@ export const keyboardButtons = {
     },
     {
       id: 11,
-      title: 'Анекдот (+18)'
+      title: 'Анекдот (18+)'
     },
     {
       id: 2,
@@ -22,7 +22,7 @@ export const keyboardButtons = {
     },
     {
       id: 12,
-      title: 'Рассказы (+18)'
+      title: 'Рассказы (18+)'
     },
     {
       id: 3,
@@ -30,7 +30,7 @@ export const keyboardButtons = {
     },
     {
       id: 13,
-      title: 'Стишки (+18)'
+      title: 'Стишки (18+)'
     },
     {
       id: 4,
@@ -38,7 +38,7 @@ export const keyboardButtons = {
     },
     {
       id: 14,
-      title: 'Афоризмы (+18)'
+      title: 'Афоризмы (18+)'
     },
     {
       id: 5,
@@ -46,7 +46,7 @@ export const keyboardButtons = {
     },
     {
       id: 15,
-      title: 'Цитаты (+18)'
+      title: 'Цитаты (18+)'
     },
     {
       id: 6,
@@ -54,7 +54,7 @@ export const keyboardButtons = {
     },
     {
       id: 16,
-      title: 'Тосты (+18)'
+      title: 'Тосты (18+)'
     },
     {
       id: 8,
@@ -62,7 +62,7 @@ export const keyboardButtons = {
     },
     {
       id: 18,
-      title: 'Статусы (+18)'
+      title: 'Статусы (18+)'
     }
   ]
 };
