@@ -7,54 +7,38 @@ const mapRand = keyboardButtons.rand.reduce((acc, item) => {
   return acc;
 }, {});
 
-bot.start(async (ctx) => {
-  await ctx.reply('Welcome!', {
-    reply_markup: Markup.keyboard(keyboard),
-    reply_to_message_id: ctx.message.message_id,
-  });
-});
+bot.start((ctx) => ctx.reply('Будь как дома, путник! 😈', Markup.keyboard(keyboard)));
 
-bot.on(message('text'), async (ctx) => {
+bot.on(message('text'), (ctx) => {
   if (ctx.message.text === keyboardButtons.advice.title) {
-    await getAdvice(ctx);
+    return getAdvice(ctx);
   } else if (ctx.message.text === keyboardButtons.quote.title) {
-    await getQuote(ctx);
+    return getQuote(ctx);
   } else if (mapRand[ctx.message.text]) {
-    await getRand(ctx, mapRand[ctx.message.text]);
+    return getRand(ctx, mapRand[ctx.message.text]);
   } else {
-    await ctx.reply('😈');
-    await ctx.reply(`${ctx.chat.first_name}, не понимаю тебя!`, {
-      reply_markup: Markup.keyboard(keyboard),
+    return ctx.reply(`${ctx.chat.first_name}, не понимаю тебя!`, {
       reply_to_message_id: ctx.message.message_id,
-    });
+    }).then(() => ctx.reply('😈'));
   }
 });
 
-async function getQuote(ctx) {
-  const text = await api.getQuote();
-
-  return ctx.replyWithHTML(text, {
-    reply_markup: Markup.keyboard(keyboard),
+function getQuote(ctx) {
+  return api.getQuote().then((text) => ctx.replyWithHTML(text, {
     reply_to_message_id: ctx.message.message_id,
-  });
+  }));
 }
 
-async function getAdvice(ctx) {
-  const text = await api.getAdvice();
-
-  return ctx.reply(text, {
-    reply_markup: Markup.keyboard(keyboard),
+function getAdvice(ctx) {
+  return api.getAdvice().then((text) => ctx.reply(text, {
     reply_to_message_id: ctx.message.message_id,
-  });
+  }));
 }
 
-async function getRand(ctx, buttonId) {
-  const text = await api.getRand(buttonId);
-
-  return ctx.reply(text, {
-    reply_markup: Markup.keyboard(keyboard),
+function getRand(ctx, buttonId) {
+  return api.getRand(buttonId).then((text) => ctx.reply(text, {
     reply_to_message_id: ctx.message.message_id,
-  });
+  }));
 }
 
 export default bot;
