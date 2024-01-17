@@ -9,6 +9,12 @@ const mapRand = keyboardButtons.rand.reduce((acc, item) => {
 
 bot.start((ctx) => ctx.reply(`Будь как дома, путник ${ctx.chat.first_name}! 😈`, Markup.keyboard(keyboard)));
 
+bot.help((ctx) => ctx.replyWithHTML(`
+/start — Запуск/перезапуск бота
+/cat — Запросить котика
+/help — Список возможных команд
+`));
+
 bot.command('cat', (ctx) => {
   return api.getCat().then((url) => ctx.replyWithPhoto(Input.fromURL(url)));
 });
