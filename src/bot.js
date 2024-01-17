@@ -7,6 +7,13 @@ const mapRand = keyboardButtons.rand.reduce((acc, item) => {
   return acc;
 }, {});
 
+bot.start(async (ctx) => {
+  await ctx.reply('Welcome!', {
+    reply_markup: Markup.keyboard(keyboard),
+    reply_to_message_id: ctx.message.message_id,
+  });
+});
+
 bot.on(message('text'), async (ctx) => {
   if (ctx.message.text === keyboardButtons.advice.title) {
     await getAdvice(ctx);
@@ -16,15 +23,17 @@ bot.on(message('text'), async (ctx) => {
     await getRand(ctx, mapRand[ctx.message.text]);
   } else {
     await ctx.reply('😈');
-    await ctx.reply(`${ctx.chat.first_name}, не понимаю тебя!`);
+    await ctx.reply(`${ctx.chat.first_name}, не понимаю тебя!`, {
+      reply_markup: Markup.keyboard(keyboard),
+      reply_to_message_id: ctx.message.message_id,
+    });
   }
 });
 
 async function getQuote(ctx) {
   const text = await api.getQuote();
 
-  return ctx.reply(text, {
-    parse_mode: 'html',
+  return ctx.replyWithHTML(text, {
     reply_markup: Markup.keyboard(keyboard),
     reply_to_message_id: ctx.message.message_id,
   });

@@ -1,7 +1,7 @@
 export const keyboardButtons = {
   advice: {
     id: 'advice',
-    title: 'Отмочить совет',
+    title: 'Отмочить совет (+18)',
   },
   quote: {
     id: 'quote',
