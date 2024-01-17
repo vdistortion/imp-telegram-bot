@@ -1,13 +1,17 @@
 import { keyboard, keyboardButtons } from './keyboard/index.js';
 import api from './api/fetch.js';
-import { bot, message, Markup } from './api/bot.js';
+import {bot, message, Markup, Input} from './api/bot.js';
 
 const mapRand = keyboardButtons.rand.reduce((acc, item) => {
   acc[item.title] = item.id;
   return acc;
 }, {});
 
-bot.start((ctx) => ctx.reply('Будь как дома, путник! 😈', Markup.keyboard(keyboard)));
+bot.start((ctx) => ctx.reply(`Будь как дома, путник ${ctx.chat.first_name}! 😈`, Markup.keyboard(keyboard)));
+
+bot.command('cat', (ctx) => {
+  return api.getCat().then((url) => ctx.replyWithPhoto(Input.fromURL(url)));
+});
 
 bot.on(message('text'), (ctx) => {
   if (ctx.message.text === keyboardButtons.advice.title) {

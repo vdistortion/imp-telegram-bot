@@ -2,6 +2,12 @@ import fetch from 'node-fetch';
 import { encoding } from '../utils/encodingText.js';
 
 export default {
+  async getCat() {
+    const response = await fetch('https://api.thecatapi.com/v1/images/search');
+    const [data] = await response.json();
+    return data.url;
+  },
+
   async getQuote() {
     const response = await fetch('https://api.forismatic.com/api/1.0/?method=getQuote&key=457653&format=json&lang=ru');
     const { quoteText, quoteAuthor } = await response.json();
