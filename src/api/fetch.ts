@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
-import { encoding } from '../utils/encodingText.js';
-import list from './list.js';
+import { encoding } from '../utils/encodingText';
+import list from './list';
 
 export default {
   async getList() {
@@ -12,24 +12,34 @@ export default {
   },
 
   async getCat() {
+    interface IApiData {
+      url: string;
+    }
     const response = await fetch('https://api.thecatapi.com/v1/images/search');
-    const [data] = await response.json();
+    const [data] = await response.json() as IApiData[];
     return data.url;
   },
 
   async getQuote() {
+    interface IApiData {
+      quoteText: string;
+      quoteAuthor: string;
+    }
     const response = await fetch('https://api.forismatic.com/api/1.0/?method=getQuote&key=457653&format=json&lang=ru');
-    const { quoteText, quoteAuthor } = await response.json();
+    const { quoteText, quoteAuthor } = await response.json() as IApiData;
     return quoteAuthor ? `${quoteText}\n<b>${quoteAuthor}</b>` : quoteText;
   },
 
   async getAdvice() {
+    interface IApiData {
+      text: string;
+    }
     const response = await fetch('https://fucking-great-advice.ru/api/random');
-    const data = await response.json();
+    const data = await response.json() as IApiData;
     return data.text;
   },
 
-  async getRand(typeId) {
+  async getRand(typeId: string) {
     const response = await fetch(`http://rzhunemogu.ru/RandJSON.aspx?CType=${typeId}`);
     const data = await response.arrayBuffer();
     const buffer = Buffer.from(data);

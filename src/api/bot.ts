@@ -1,6 +1,7 @@
 import { Telegraf, Markup, Input } from 'telegraf';
 import { message } from 'telegraf/filters';
 
-const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
+const token: string = process.env.TELEGRAM_BOT_TOKEN!;
+const bot = new Telegraf(token);
 
 export { bot, message, Markup, Input };

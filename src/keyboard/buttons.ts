@@ -1,4 +1,15 @@
-export const keyboardButtons = {
+type KeyboardButtonsItemType = {
+  id: string,
+  title: string,
+};
+
+type KeyboardButtonsType = {
+  advice: KeyboardButtonsItemType,
+  quote: KeyboardButtonsItemType,
+  rand: KeyboardButtonsItemType[],
+};
+
+export const keyboardButtons: KeyboardButtonsType = {
   advice: {
     id: 'advice',
     title: 'Отмочить совет (18+)',
@@ -9,59 +20,59 @@ export const keyboardButtons = {
   },
   rand: [
     {
-      id: 1,
+      id: '1',
       title: 'Анекдот'
     },
     {
-      id: 11,
+      id: '11',
       title: 'Анекдот (18+)'
     },
     {
-      id: 2,
+      id: '2',
       title: 'Рассказы'
     },
     {
-      id: 12,
+      id: '12',
       title: 'Рассказы (18+)'
     },
     {
-      id: 3,
+      id: '3',
       title: 'Стишки'
     },
     {
-      id: 13,
+      id: '13',
       title: 'Стишки (18+)'
     },
     {
-      id: 4,
+      id: '4',
       title: 'Афоризмы'
     },
     {
-      id: 14,
+      id: '14',
       title: 'Афоризмы (18+)'
     },
     {
-      id: 5,
+      id: '5',
       title: 'Цитаты'
     },
     {
-      id: 15,
+      id: '15',
       title: 'Цитаты (18+)'
     },
     {
-      id: 6,
+      id: '6',
       title: 'Тосты'
     },
     {
-      id: 16,
+      id: '16',
       title: 'Тосты (18+)'
     },
     {
-      id: 8,
+      id: '8',
       title: 'Статусы'
     },
     {
-      id: 18,
+      id: '18',
       title: 'Статусы (18+)'
     }
   ]
