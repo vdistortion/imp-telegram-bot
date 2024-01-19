@@ -2,8 +2,10 @@ import fetch from 'node-fetch';
 import { encoding } from '../utils/encodingText';
 import list from './list';
 
+const weatherApiKey: string = process.env.API_KEY_OPENWEATHERMAP!;
+
 export default {
-  async getList() {
+  getList() {
     const randomIndex = Math.floor(Math.random() * list.length);
     const randomItem = list[randomIndex];
     const number = `<b>[${randomIndex + 1}/${list.length}]</b>`;
@@ -45,5 +47,10 @@ export default {
     const buffer = Buffer.from(data);
     const encodingData = encoding(buffer);
     return encodingData.replace('{"content":"', '').replace('"}', '');
+  },
+
+  async getWeather(latitude: number, longitude: number) {
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherApiKey}&units=metric&lang=ru`);
+    return response.json();
   },
 };
